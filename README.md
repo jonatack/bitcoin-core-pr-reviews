@@ -10,8 +10,7 @@ then:
 
 ```lisp
 (ql:quickload 'bitcoin-core-pr-reviews)
-(bitcoin-core-pr-reviews::graphql-post "<pull request number" :verbose t)
-(bitcoin-core-pr-reviews::graphql-post "<pull request number" :raw t)
+(bitcoin-core-pr-reviews::get-pull-requests :verbose t)
 ```
 
 The API calls accept the following optional boolean keyword parameters:

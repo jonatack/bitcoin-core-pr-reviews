@@ -59,3 +59,6 @@
 
 (defun get-pull-request ()
   (graphql-post (read-file "./github-graphql-queries/pull_request.graphql")))
+
+(defun get-pull-requests ()
+  (graphql-post (read-file "./github-graphql-queries/pull_requests.graphql")))

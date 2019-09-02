@@ -1,0 +1,98 @@
+{
+  "query": "query {
+    rateLimit {
+      limit
+      cost
+      remaining
+      resetAt
+    }
+    repository(owner: bitcoin, name: bitcoin) {
+      pullRequests(first: 10,
+                   orderBy: { field: UPDATED_AT, direction: DESC }) {
+        totalCount
+        edges {
+          cursor
+          node {
+            id
+            number
+            title
+            mergeable
+            url
+            author {
+              login
+              url
+              avatarUrl
+            }
+            additions
+            deletions
+            createdAt
+            updatedAt
+            mergedAt
+            closedAt
+            state
+            labels(last: 100) {
+              totalCount
+              nodes {
+                id
+                name
+                color
+              }
+            }
+            body
+            bodyHTML
+            headRefOid
+            commits(last: 100) {
+              totalCount
+              nodes {
+                commit {
+                  oid
+                  changedFiles
+                  additions
+                  deletions
+                  authoredDate
+                  committedDate
+                  pushedDate
+                  message
+                  messageBody
+                  status {
+                    state
+                    contexts {
+                      description
+                    }
+                  }
+                  url
+                }
+              }
+            }
+            reviews(last: 100) {
+              totalCount
+              nodes {
+                id
+                publishedAt
+                author {
+                  login
+                  avatarUrl
+                }
+                body
+                url
+              }
+            }
+            comments(last: 100) {
+              totalCount
+              nodes {
+                id
+                publishedAt
+                author {
+                  login
+                  avatarUrl
+                }
+                body
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }"
+}
