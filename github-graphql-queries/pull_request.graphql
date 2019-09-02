@@ -1,0 +1,65 @@
+{
+  "query": "query {
+    rateLimit {
+      limit
+      cost
+      remaining
+      resetAt
+    }
+    repository(owner: bitcoin, name: bitcoin) {
+      pullRequest(number: 5153) {
+        number
+        publishedAt
+        author {
+          login
+          avatarUrl
+        }
+        id
+        body
+        commits(last: 100) {
+          totalCount
+          edges {
+            node {
+              commit {
+                oid
+                url
+                id
+                message
+              }
+            }
+          }
+        }
+        comments(last: 100) {
+          totalCount
+          edges {
+            node {
+              publishedAt
+              author {
+                login
+                avatarUrl
+              }
+              url
+              id
+              body
+            }
+          }
+        }
+        reviews(last: 100) {
+          totalCount
+          edges {
+            node {
+              publishedAt
+              author {
+                login
+                avatarUrl
+              }
+              url
+              id
+              body
+            }
+          }
+        }
+      }
+    }
+  }"
+}

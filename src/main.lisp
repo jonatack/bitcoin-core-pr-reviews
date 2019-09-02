@@ -56,3 +56,6 @@
     (let ((string (make-string (file-length stream))))
       (read-sequence string stream)
       string)))
+
+(defun get-pull-request ()
+  (graphql-post (read-file "./github-graphql-queries/pull_request.graphql")))
