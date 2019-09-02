@@ -5,7 +5,7 @@
 (defpackage #:bitcoin-core-pr-reviews
   (:documentation "A Common Lisp bot that tweets/toots Bitcoin Core PR Reviews")
   (:nicknames #:bitcoin-core-pr-reviews/src/main)
-  (:use #:cl)
+  (:use #:cl #:mito)
   (:shadowing-import-from #:dexador
                           #:get
                           #:post)
@@ -27,6 +27,14 @@
 (defparameter *github-path* "/graphql")
 (defparameter *github-user* "jonatack")
 (defparameter *github-token* "token")
+(defparameter *postgres-password* "")
+
+(defun db-connect ()
+  (mito:connect-toplevel
+   :postgres
+   :database-name "bitcoin_core_pr_reviews"
+   :username "jon"
+   :password *postgres-password*))
 
 (defun headers ()
   `(("accept" . "application/vnd.github.starfox-preview+json")
