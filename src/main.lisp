@@ -36,17 +36,23 @@
    :username "jon"
    :password *postgres-password*))
 
+(defun graphql-post (query &key raw verbose)
+  (check-type query simple-string)
+  (let* ((uri (make-uri :scheme "https" :host *github-host* :path *github-path*))
+         (data (stripped query))
+         (response (post uri :headers (headers) :content data :verbose verbose)))
+    (if raw response (parse response))))
+
 (defun headers ()
   `(("accept" . "application/vnd.github.starfox-preview+json")
     ("user-agent" . ,*github-user*)
     ("authorization" . ,*github-token*)))
 
-(defun stripped (text)
-  (clean (remove #\Newline text)))
+(defun stripped (string)
+  (clean (remove #\Newline string)))
 
-(defun graphql-post (pull-request-number &key raw verbose)
-  (check-type pull-request-number simple-string)
-  (let* ((uri (make-uri :scheme "https" :host *github-host* :path *github-path*))
-         (data (stripped(pull-request-query pull-request-number)))
-         (response (post uri :headers (headers) :content data :verbose verbose)))
-    (if raw response (parse response))))
+(defun read-file (path)
+  (with-open-file (stream path :direction :input :if-does-not-exist nil)
+    (let ((string (make-string (file-length stream))))
+      (read-sequence string stream)
+      string)))
