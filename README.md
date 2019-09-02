@@ -1,17 +1,34 @@
 # Bitcoin Core PR Reviews
 
-A Common Lisp bot to promote reviewing Bitcoin Core PRs by tweeting them on Twitter and tooting them on Mastodon.
+A Common Lisp app to promote Bitcoin Core code review by tweeting PR reviews on
+Twitter and tooting them on Mastodon.
 
+## Getting Started
+
+To use, git clone the repo into your `~/quicklisp/local-projects` directory,
+then:
+
+```lisp
+(ql:quickload 'bitcoin-core-pr-reviews)
+(bitcoin-core-pr-reviews::graphql-post "<pull request number" :verbose t)
+(bitcoin-core-pr-reviews::graphql-post "<pull request number" :raw t)
+```
+
+The API calls accept the following optional boolean keyword parameters:
+
+- RAW (T or default NIL) to return the JSON response as a raw string instead of
+  parsed and converted to a list data structure.
+
+- VERBOSE (T or default NIL) to output the HTTP request headers for verifying
+  and debugging.
 
 ## Dependencies
 
 DEXADOR, QURI, JSOWN, CHIRP, TOOTER, MITO, PostgreSQL.
 
-
 ## Portability
 
-Developed with Steel Bank Common Lisp (SBCL), version 1.5.3.
-
+Developed with Steel Bank Common Lisp (SBCL), version 1.5.6.
 
 ## Tests
 
@@ -36,11 +53,9 @@ To run the tests of one test file only, append the file name without the extensi
 (rove:run :bitcoin-core-pr-reviews/tests/main)         ; Run tests in tests/main.lisp only.
 ```
 
-
 ### Author
 
 * Jon Atack (jon@atack.com)
-
 
 ### Copyright
 
