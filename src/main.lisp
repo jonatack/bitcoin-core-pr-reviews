@@ -15,6 +15,8 @@
                 #:parse)
   (:import-from #:cl-strings
                 #:clean)
+  (:import-from #:bitcoin-core-pr-reviews/src/pull-request-query
+                #:pull-request-query)
   (:export #:graphql_post))
 (in-package #:bitcoin-core-pr-reviews)
 
